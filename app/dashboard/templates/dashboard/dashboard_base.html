@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ONE TU Dashboard{% endblock %}</title>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!-- ── Topbar + Tab Nav (ทุกหน้าใช้ร่วมกัน) ── -->
+    <div class="topbar">
+        <a href="{% url 'home' %}" class="logo-link" title="กลับหน้าหลัก">
+            <img src="{% static 'dashboard/tu_logo.png' %}" alt="Thammasat University">
+        </a>
+        <nav class="tab-nav">
+            <a href="{% url 'dashboard_student' %}"
+               class="{% if active_tab == 'student' %}active{% endif %}">
+                นักศึกษา
+            </a>
+            <a href="{% url 'dashboard_personnel' %}"
+               class="{% if active_tab == 'personnel' %}active{% endif %}">
+                บุคลากร
+            </a>
+            <a href="{% url 'dashboard_finance' %}"
+               class="{% if active_tab == 'finance' %}active{% endif %}">
+                การเงิน
+            </a>
+        </nav>
+    </div>
+
+    <!-- ── Content (แต่ละหน้า override ตรงนี้) ── -->
+    {% block content %}{% endblock %}
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

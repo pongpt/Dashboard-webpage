@@ -1,0 +1,68 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block title %}ONE TU — นักศึกษา{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+    <h2>📊 ความพึงพอใจของนักศึกษา</h2>
+    {% if row_count %}
+        <span class="badge">ข้อมูลทั้งหมด {{ row_count }} แถว</span>
+    {% endif %}
+</div>
+
+{% if error %}
+<div class="no-data">⚠️ {{ error }}</div>
+
+{% elif charts %}
+<div class="charts-grid">
+
+    <!-- แถว 1: Bar + Pie -->
+    {% for chart in charts|slice:":2" %}
+    <div class="chart-card">
+        <div id="{{ chart.id }}" class="chart-plot"></div>
+    </div>
+    {% endfor %}
+
+    <!-- แถว 2: Line (full width) -->
+    {% for chart in charts|slice:"2:3" %}
+    <div class="chart-card chart-card--full">
+        <div id="{{ chart.id }}" class="chart-plot"></div>
+    </div>
+    {% endfor %}
+
+    <!-- แถว 3: Horizontal bar + Radar -->
+    {% for chart in charts|slice:"3:5" %}
+    <div class="chart-card">
+        <div id="{{ chart.id }}" class="chart-plot"></div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% else %}
+<div class="no-data">
+    ⚠️ ไม่พบไฟล์ข้อมูล — วางไฟล์
+    <code>cleaned_survey_satisfaction_656667_full.csv</code>
+    ไว้ใน <code>app/data/</code>
+</div>
+{% endif %}
+
+{% endblock %}
+
+
+{% block extra_js %}
+{% if charts %}
+<script>
+    var CHARTS_DATA = [
+        {% for chart in charts %}
+        { id: "{{ chart.id }}", fig: {{ chart.json|safe }} }
+        {% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ];
+</script>
+<script src="{% static 'dashboard/js/student_dashboard.js' %}"></script>
+{% endif %}
+{% endblock %}

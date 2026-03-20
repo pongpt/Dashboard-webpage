@@ -1,0 +1,17 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% block title %}ONE TU Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>
+        {% if active_tab == 'personnel' %}👥 ข้อมูลบุคลากร
+        {% elif active_tab == 'finance' %}💰 ข้อมูลการเงิน
+        {% endif %}
+    </h2>
+</div>
+
+<div class="no-data">
+    🚧 กำลังพัฒนา — ยังไม่มีข้อมูลในส่วนนี้
+</div>
+{% endblock %}
