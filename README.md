@@ -57,6 +57,7 @@ requirements.txt
 ```bash
 git clone https://github.com/pongpt/Dashboard-webpage.git
 cd Dashboard-webpage
+cp .env.example .env   # then set your own password and secret key
 docker compose up --build
 ```
 
