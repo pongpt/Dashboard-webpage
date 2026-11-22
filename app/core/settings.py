@@ -49,7 +49,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('POSTGRES_DB', 'dashboard_db'),
         'USER': os.environ.get('POSTGRES_USER', 'dashboard_user'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'secret123'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
         'HOST': os.environ.get('POSTGRES_HOST', 'db'),
         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     }
